@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}My Life Applications{% endblock %}
+{% block content %}
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Status</th>
+    <th>Rejection Note</th>
+  </tr>
+  {% for app in applications %}
+  <tr>
+    <td>{{ app.id }}</td>
+    <td>{{ app.status }}</td>
+    <td>{{ app.rejection_note|default:"—" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

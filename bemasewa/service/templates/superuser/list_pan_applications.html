@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PAN Card Applications</title>
+    <style>
+        table {
+            width: 95%;
+            margin: 30px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+        form {
+            margin: 0;
+        }
+        textarea {
+            width: 100%;
+            resize: vertical;
+        }
+        .btn-approve {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btn-reject {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">PAN Card Applications</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Rejection Note</th>
+            <th>Action</th>
+        </tr>
+        {% for app in applications %}
+        <tr>
+            <td>{{ app.id }}</td>
+            <td>{{ app.full_name }}</td>
+            <td>{{ app.email }}</td>
+            <td>{{ app.status }}</td>
+            <td>{{ app.rejection_note|default:"—" }}</td>
+            <td>
+                {% if app.status == 'Pending' %}
+                <form action="{% url 'approve_pan' app.id %}" method="post" style="display:inline-block;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-approve">Approve</button>
+                </form>
+
+                <form action="{% url 'reject_pan' app.id %}" method="post" style="margin-top:5px;">
+                    {% csrf_token %}
+                    <textarea name="note" rows="2" placeholder="Rejection reason (optional)"></textarea><br>
+                    <button type="submit" class="btn-reject">Reject</button>
+                </form>
+                {% else %}
+                    <strong>{{ app.status }}</strong>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No applications submitted.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

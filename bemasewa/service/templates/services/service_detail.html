@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Apply for Service{% endblock %}
+{% block content %}
+<h2>Apply for {{ service.name }}</h2>
+<p>{{ service.description }}</p>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Submit Application</button>
+</form>
+{% endblock %}

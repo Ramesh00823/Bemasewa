@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PAN Card Application</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'apply_pan.css' %}">
+</head>
+<body>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+    <div class="content">
+        <div class="form-container">
+            <h2>Apply for PAN Card</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Application</button>
+                <a href="{% url 'home' %}" style="
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #28a745;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                    border: none;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                " onmouseover="this.style.backgroundColor='#218838'" onmouseout="this.style.backgroundColor='#28a745'">
+                    Back
+                </a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

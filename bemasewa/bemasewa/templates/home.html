@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - BemaSewa{% endblock %}
+
+{% block content %}
+<h2>Available Services</h2>
+<div class="row">
+
+  <!-- PAN Register Service -->
+  <div class="col-md-4">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">PAN Register</h5>
+        <p class="card-text">Register your PAN number with ease and get access to government tax services.</p>
+        <a href="{% url 'apply_pan' %}" class="btn btn-primary">Apply Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Life Insurance Service -->
+  <div class="col-md-4">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Life Insurance</h5>
+        <p class="card-text">Secure your family's future with our trusted life insurance registration service.</p>
+        <a href="{% url 'apply_insurance' %}" class="btn btn-primary">Apply Now</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
